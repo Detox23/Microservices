@@ -4,7 +4,7 @@ const axios = require('axios');
 const hostname = '127.0.0.1';
 const sendMessage = require('./rabbitMq');
 const advUrl = 'http://psuaddservice.fenris.ucn.dk';
-const port = 3000;
+
 
 
 app.get('/adv', (req, res)=>{
@@ -18,7 +18,7 @@ app.get('/adv', (req, res)=>{
 })
 
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Server started");
 })
 
