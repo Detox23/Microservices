@@ -1,43 +1,24 @@
-const http = require('http');
-const hostname = '127.0.0.1';
-const port = 3000;
+const express = require('express');
+const app = express();
 const axios = require('axios');
+const hostname = '127.0.0.1';
+const sendMessage = require('./rabbitMq');
+const advUrl = 'http://psuaddservice.fenris.ucn.dk';
+const port = 3000;
 
-function getAdvertisement(){
-    axios.get("http://psuaddservice.fenris.ucn.dk")
-        .then(function(response){
-            if(response.data.toLowerCase().includes("sorry")){
-                console.log("Error");
-            }else{
-                console.log(response.data)
-            }
-
-        }).catch(function(error){
-        console.log(error)
-    })
-}
-
-
-const requestListener = function(req, res){
-    switch(req.url){
-        case "/adv":
-            res.writeHead(200);
-            res.end(getAdvertisement());
-            break
-        default:
-            res.writeHead(404);
-            res.end(JSON.stringify("Error"));
-    }
+app.get('/adv', (req, res)=>{
+    axios.get(advUrl).then(response => {
+        console.log(response.data)
+        res.send(response.data);
+    }).catch(error => {
+        console.log("Error");
+        console.log(error);
+    });
+})
 
 
-    res.writeHead(200);
-    res.end("Server!");
-};
-
-
-const server = http.createServer(requestListener);
-server.listen(port, hostname, ()=>{
-    console.log(`Server running at http://${hostname}:${port}`);
+app.listen(port, () => {
+    console.log("Server started");
 })
 
 
