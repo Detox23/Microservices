@@ -6,6 +6,7 @@ const sendMessage = require('./rabbitMq');
 const advUrl = 'http://psuaddservice.fenris.ucn.dk';
 const port = 3000;
 
+
 app.get('/adv', (req, res)=>{
     axios.get(advUrl).then(response => {
         console.log(response.data)
