@@ -31,7 +31,7 @@ spec:
                       - parking-adv-node
       containers:
         - name: parking-adv-node
-          image: docker.io/detox23/parking-adv-node:2
+          image: docker.io/detox23/parking-adv-node:3
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

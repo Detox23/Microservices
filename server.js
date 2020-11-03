@@ -4,9 +4,7 @@ const axios = require('axios');
 const sendMessage = require('./rabbitMq');
 const advUrl = 'http://psuaddservice.fenris.ucn.dk';
 
-
-
-app.get('/adv', (req, res)=>{
+app.get('/', (req, res)=>{
     axios.get(advUrl).then(response => {
         console.log(response.data)
         res.send(response.data);
