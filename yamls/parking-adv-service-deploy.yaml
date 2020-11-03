@@ -11,4 +11,4 @@ spec:
   ports:
     - port: 5200
       protocol: TCP
-      targetPort: 500
+      targetPort: 5000
