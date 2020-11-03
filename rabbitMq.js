@@ -2,8 +2,12 @@ const amqp = require('amqplib/callback_api');
 
 module.exports = sendMessage = (msg) => {
 
-    amqp.connect('amqp://localhost', function(error0, connection){
+    const opt = { credentials: require('amqplib').credentials.plain('rabbit', 'AoqqN5gWtuTG') };
+
+
+    amqp.connect('amqp://35.228.41.68:5672', opt,  function(error0, connection){
         if(error0){
+            console.log(error0);
             throw error0;
         }
 

@@ -6,7 +6,7 @@ const advUrl = 'http://psuaddservice.fenris.ucn.dk';
 
 app.get('/', (req, res)=>{
     axios.get(advUrl).then(response => {
-        console.log(response.data)
+        sendMessage(response.data)
         res.send(response.data);
     }).catch(error => {
         console.log("Error");
