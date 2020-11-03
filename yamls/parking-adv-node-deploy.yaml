@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parking-adv-node
+  labels:
+    app: parking-adv-node
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: parking-adv-node
+  template:
+    metadata:
+      labels:
+        app: parking-adv-node
+    spec:
+      # Affinity to select nodes based on pod requirements
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: nodename
+                    operator: In
+                    values:
+                      - parking-adv-node
+      containers:
+        - name: parking-adv-node
+          image: docker.io/detox23/parking-adv-node:2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              protocol: TCP

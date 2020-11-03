@@ -1,0 +1,10 @@
+{
+  "kind": "Node",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "parking-adv-node",
+    "labels": {
+      "name": "parking-adv-node"
+    }
+  }
+}
